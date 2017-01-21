@@ -217,7 +217,7 @@
 
     /// Create variable to hold arguments.length
     /// Tried to call arguments.length inside anonymous function but did not work
-    
+
     var argumentsLength = arguments.length;
 
     return _.reduce(collection, function(accumulator, value) {
@@ -237,8 +237,26 @@
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
+  /// every vs some
+  /// every checks whether all elements are truthy
+  /// some just checks if one element is truthy
+  
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    var argumentsLength = arguments.length;
+
+    return _.reduce(collection, function(accumulator, current) {
+      if (argumentsLength == 1) {
+        return collection.includes(true) ? true : false;
+      }
+      /// console.log('accumulator', accumulator);
+      /// console.log('current', iterator(current));
+      /// return accumulator || iterator(current);
+      if(accumulator || iterator(current)) {
+        return true;
+      }
+      return false;
+    }, false);
   };
 
 
