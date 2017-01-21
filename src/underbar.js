@@ -105,6 +105,20 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    // use _.each
+    var result = [];
+
+    _.each(array, function(value) {
+      if(!(value in result)) {
+        result.push(value);
+        console.log('original', array);
+        console.log('value', value);
+        console.log('result', result);
+        console.log('BREAK');
+      }
+    });
+
+    return result;
   };
 
 
