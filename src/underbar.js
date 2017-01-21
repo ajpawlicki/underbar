@@ -176,6 +176,7 @@
       // Slice collection
       collection = collection.slice(1);
 
+      // Why does anonymous function only have one parameter??
       _.each(collection, function(number) {
         accumulator = iterator(accumulator, number);
       });
@@ -187,7 +188,7 @@
     };
 
     return accumulator;
-    
+
   };
 
   // Determine if the array or object contains a given value (using `===`).
