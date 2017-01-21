@@ -195,6 +195,9 @@
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
+    /// What is wasFound?
+    /// Function to find
+
     return _.reduce(collection, function(wasFound, item) {
       if (wasFound) {
         return true;
@@ -207,6 +210,29 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    /// If I find one false then always return false
+    /// e.g.
+    /// [1, 2, 3]
+    /// function(value) { return value == 3 };
+
+    /// Create variable to hold arguments.length
+    /// Tried to call arguments.length inside anonymous function but did not work
+    
+    var argumentsLength = arguments.length;
+
+    return _.reduce(collection, function(accumulator, value) {
+      /// console.log('accumulator', accumulator);
+      /// console.log('current', iterator(value));
+      if(argumentsLength == 1) {
+        return collection.includes(false) ? false : true;
+      }
+      if(!accumulator || !iterator(value)) {
+        return false;
+      }
+      return true;
+      /// Why doesn't this work??
+      /// return accumulator && iterator(value);
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
