@@ -224,7 +224,7 @@
       /// console.log('accumulator', accumulator);
       /// console.log('current', iterator(value));
       if(argumentsLength == 1) {
-        return collection.includes(false) ? false : true;
+        return _.contains(collection, false) ? false : true;
       }
       if(!accumulator || !iterator(value)) {
         return false;
@@ -247,7 +247,7 @@
 
     return _.reduce(collection, function(accumulator, current) {
       if (argumentsLength == 1) {
-        return collection.includes(true) ? true : false;
+        return _.contains(collection, true) ? true : false;
       }
       /// console.log('accumulator', accumulator);
       /// console.log('current', iterator(current));
