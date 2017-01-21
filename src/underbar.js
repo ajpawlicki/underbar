@@ -109,12 +109,8 @@
     var result = [];
 
     _.each(array, function(value) {
-      if(!(value in result)) {
+      if(!(result.includes(value))) {
         result.push(value);
-        console.log('original', array);
-        console.log('value', value);
-        console.log('result', result);
-        console.log('BREAK');
       }
     });
 
