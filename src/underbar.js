@@ -351,15 +351,28 @@
     /// arguments
     /// store all arguments in arrays
     /// need to store func's parameters
-    
-    var storage = {};
-    return function(value) {
+    /// storage is unique to func i.e. stores every single call's information
+    /// myParameters will change depending on current func call
 
-      if (!storage[value]) {
-        storage[value] = func(value);
+    var storage = {};
+    /// Why hold result variable here?
+
+    return function() {
+
+      /// I need to do this in theory -> var myParameters = func.arguments;
+
+      var result = func.apply(this, arguments);
+
+      var myParameters = arguments;
+
+      if (!_.contains(storage, myParameters)) {
+        storage[myParameters] = result;
       }
-      return storage[value];
+      return storage[myParameters];
+      
     }
+
+
     //return _.once(func);
   };
 
