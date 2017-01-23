@@ -367,12 +367,19 @@
 
       var myParameters = arguments;
 
-      if (_.contains(storage, myParameters)) {
-        console.log('use storage');
+      if (storage[myParameters]) {
+        console.log('IN STORAGE');
+        console.log('myParameters: ', myParameters);
+        console.log('storage: ', storage);
+        console.log('return value: ', storage[myParameters], 'END');
         return storage[myParameters];
       } else {
         /// not storing myParameters
         storage[myParameters] = result;
+        console.log('NOT IN STORAGE');
+        console.log('myParameters: ', myParameters);
+        console.log('storage: ', storage);
+        console.log('return value: ', storage[myParameters], 'END');
         return storage[myParameters];
       }
     }
