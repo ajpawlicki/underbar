@@ -365,7 +365,7 @@
 
       /// myParameters is new every func call
 
-      var myParameters = arguments;
+      var myParameters = JSON.stringify(arguments);
 
       if (storage[myParameters]) {
         console.log('IN STORAGE');
@@ -379,7 +379,7 @@
         console.log('NOT IN STORAGE');
         console.log('myParameters: ', myParameters);
         console.log('storage: ', storage);
-        console.log('return value: ', storage[myParameters], 'END');
+        console.log('return values: ', storage[myParameters], 'END');
         return storage[myParameters];
       }
     }
