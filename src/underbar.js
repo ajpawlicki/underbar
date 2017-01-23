@@ -358,34 +358,13 @@
     /// Why hold result variable here?
 
     return function() {
-
-      /// I need to do this in theory -> var myParameters = func.arguments;
-
-      var result = func.apply(this, arguments);
-
-      /// myParameters is new every func call
-
       var myParameters = JSON.stringify(arguments);
 
-      if (storage[myParameters]) {
-        console.log('IN STORAGE');
-        console.log('myParameters: ', myParameters);
-        console.log('storage: ', storage);
-        console.log('return value: ', storage[myParameters], 'END');
-        return storage[myParameters];
-      } else {
-        /// not storing myParameters
-        storage[myParameters] = result;
-        console.log('NOT IN STORAGE');
-        console.log('myParameters: ', myParameters);
-        console.log('storage: ', storage);
-        console.log('return values: ', storage[myParameters], 'END');
-        return storage[myParameters];
+      if(!storage[myParameters]) {
+        storage[myParameters] = func.apply(this, arguments);
       }
+      return storage[myParameters];
     }
-
-
-    //return _.once(func);
   };
 
   // Delays a function for the given number of milliseconds, and then calls
