@@ -396,6 +396,33 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var result = [];
+
+    /// Use Math.random for array
+    /// Check if index is used yet
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    /// Have to make sure random index is unique
+
+    var randomIndex;
+    var checkUniqueIndex = {};
+
+    while (result.length < array.length) {
+      /// This while loop makes sure result array is same length as argument array
+      randomIndex = getRandomInt(0, array.length - 1);
+      /// Need to make sure random index is unique
+      /// How do I check if random index was already used
+      if (!checkUniqueIndex[randomIndex]) {
+        result.push(array[randomIndex]);
+        checkUniqueIndex[randomIndex] = true;
+      }
+    }
+
+    return result;
   };
 
 
