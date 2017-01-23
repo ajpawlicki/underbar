@@ -363,13 +363,18 @@
 
       var result = func.apply(this, arguments);
 
+      /// myParameters is new every func call
+
       var myParameters = arguments;
 
-      if (!_.contains(storage, myParameters)) {
+      if (_.contains(storage, myParameters)) {
+        console.log('use storage');
+        return storage[myParameters];
+      } else {
+        /// not storing myParameters
         storage[myParameters] = result;
+        return storage[myParameters];
       }
-      return storage[myParameters];
-      
     }
 
 
