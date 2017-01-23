@@ -374,6 +374,14 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var myParameters = Array.from(arguments).slice(2);
+    /// This doesn't work below because func.apply calls the function and want to delay it
+    /// return setTimeout(func.apply(this, myParameters), wait);
+    /// So hide function in another function
+    var delayedFunc = function() {
+      return func.apply(this, myParameters);
+    }
+    return setTimeout(delayedFunc, wait);
   };
 
 
