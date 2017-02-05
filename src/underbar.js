@@ -553,6 +553,29 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    // arguments length is variable
+    // check length of arguments
+    var result = [];
+
+    var longestParameter = _.reduce(arguments, function(accumulator, current) {
+      if (current.length > accumulator.length) {
+        return current;
+      }
+      return accumulator;
+    }, arguments[0]);
+
+    var length = longestParameter.length;
+
+    for (var i = 0; i < length; i++) {
+      var nest = [];
+      _.each(arguments, function(parameterArray, index) {
+        nest.push(parameterArray[i]);
+      });
+      // console.log(JSON.stringify(nest));
+      result.push(nest);
+    }
+
+    return result;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
