@@ -642,9 +642,20 @@
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
     var result = arguments[0];
-    var collectionToCallEachOn = result;
+    var collectionToCallEachOn = arguments[0];
     var calledFuncArguments = arguments;
-    
+
+    var firstParameter = arguments[0];
+
+    var intersectionArray = _.intersection.apply(null, arguments);
+
+    return _.filter(firstParameter, function(element) {
+      return !_.contains(intersectionArray, element);
+    });
+
+    console.log('intersectionArray: ', JSON.stringify(intersectionArray));
+    console.log('firstParameter: ', JSON.stringify(firstParameter));
+
     /*while (i < arguments.length) {
       _.each(result, function(element, index) {
         console.log(element);
@@ -657,10 +668,7 @@
     }*/
     // var count = 1;
 
-    // console.log(arguments[0]);
-
-    _.each(collectionToCallEachOn, function(element, index) {
-      var splice = index;
+    /*_.each(collectionToCallEachOn, function(element, index) {
       var i = 1;
       console.log('collection: ', JSON.stringify(collectionToCallEachOn));
       // console.log('count: ', count);
@@ -672,7 +680,6 @@
         console.log('current element', element);
         console.log('compared array: ', JSON.stringify(calledFuncArguments[i]));
         if (_.contains(calledFuncArguments[i], element)) {
-          // console.log('current element', element);
           console.log('before splice', JSON.stringify(result));
           // original array is messed up after SPLICE
           // index might be causing bug
@@ -688,8 +695,10 @@
 
     console.log('END');
     
-    return result;
+    return result;*/
   };
+
+
 
   // Returns a function, that, when invoked, will only be triggered at most once
   // during a given window of time.  See the Underbar readme for extra details
