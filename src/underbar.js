@@ -609,7 +609,32 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var result = [];
     // number of parameters is variable so use arguments
+
+    // can use some here to see if other parameters contain element
+    var i = 0; // arguments
+    while (i < arguments.length) {
+      //console.log(JSON.stringify(arguments));
+      var j = 0; // nested
+      // look at arguments[i][j] and see if arguments[i + 1]
+      // once loop finds another parameter contains element then break out of loop
+      while (j < arguments[i].length) {
+        // console.log(arguments[i][j]);
+        var t = i + 1; // comparing internal index
+        while (t < arguments.length) {
+          // console.log(arguments[i][j]);
+          if (_.contains(arguments[t], arguments[i][j])) {
+            result.push(arguments[i][j]);
+          }
+          t++;
+        }
+        j++;
+      }
+      i++;
+    }
+
+    return result;
   };
 
   // Take the difference between one array and a number of other arrays.
