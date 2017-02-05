@@ -457,6 +457,94 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    ///// use sort and invoke and pluck
+    /// sort
+
+    /// iterator can be function or string
+    /// collection could contain objects or numbers
+
+    /*function checkCollection(type) {
+      var iteratedArray = _.map(collection, iterator);
+      return _.some(iteratedArray, function(element) {
+        return typeof element == type;
+      })
+    }*/
+
+    if (typeof iterator == 'function') {
+      // don't understand a - b
+      return collection.sort(function(a, b) {
+        return iterator(a) - iterator(b);
+      });
+    } else if (typeof iterator == 'string') {
+      return collection.sort(function(a, b) {
+        return a[iterator] - b[iterator];
+      });
+    }
+
+
+    // try using reduce here!!
+    /* var result = [];
+    var inputArray = collection;
+    inputArray.sort();
+    //console.log(collection);
+
+    /// Need to compare every element in array
+    /// for loop or each
+    /// use unique and reduce
+    /// pluck returns array with specific key
+    
+    // var i, j;
+    /// i represents current element
+    /// j represents comparing element
+
+    var allUndefined = function(array) {
+      return _.every(array, function(element) {
+        return element === undefined;
+      });
+    }
+
+    /// might have to use reduce
+    /// need to use splice on inputArray
+    /*while (result.length < collection.length) {
+
+      _.each(inputArray, function(currentElement, i) {
+        // if one element left in inputArray no need to loop
+        var elementInOrder;
+        var index;
+        _.each(inputArray, function(comparedElement) {
+
+          if (allUndefined(inputArray) || inputArray.length == 1 || iterator(currentElement) < iterator(comparedElement)) {
+            elementInOrder = currentElement
+            index = i;
+          }
+        });
+        if (elementInOrder != undefined) {
+          // console.log(elementInOrder);
+          console.log('element' , JSON.stringify(elementInOrder));
+          console.log('index', index);
+          result.push(elementInOrder);
+          // splice inputArray
+          console.log('before splice', JSON.stringify(inputArray));
+          inputArray.splice(index, 1);
+          console.log('after splice', JSON.stringify(inputArray));
+          console.log('END');
+        } else if (allUndefined(inputArray)) {
+          result.push(elementInOrder);
+          inputArray.splice(index, 1);
+        }
+      })*/
+
+      /*if (iterator(inputArray[i]) < iterator(inputArray[j])) {
+        i++;
+      } else {
+        j++;
+      }*/
+
+      // reduce collection to
+    //}
+
+    // return result;*/
+
   };
 
   // Zip together two or more arrays with elements of the same index
