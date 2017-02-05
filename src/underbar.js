@@ -583,11 +583,33 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    var result = [];
+    function flat(array) {
+      /*return _.reduce(nestedArray, function(accumulator, current) {
+        if (!Array.isArray(current)) {
+          return current;
+        }
+      });*/
+      _.each(array, function(element) {
+        // base case
+        if (!Array.isArray(element)) {
+          result.push(element);
+        }
+        flat(element);
+      });
+    }
+
+    // recursion;
+
+    flat(nestedArray);
+
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    // number of parameters is variable so use arguments
   };
 
   // Take the difference between one array and a number of other arrays.
