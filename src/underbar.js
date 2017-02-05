@@ -647,6 +647,7 @@
 
     var firstParameter = arguments[0];
 
+    /// Need to use apply because arguments is an array and not an argument list!!!
     var intersectionArray = _.intersection.apply(null, arguments);
 
     return _.filter(firstParameter, function(element) {
