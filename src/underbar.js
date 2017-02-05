@@ -614,6 +614,7 @@
 
     // can use some here to see if other parameters contain element
     var i = 0; // arguments
+
     while (i < arguments.length) {
       //console.log(JSON.stringify(arguments));
       var j = 0; // nested
@@ -640,6 +641,54 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var result = arguments[0];
+    var collectionToCallEachOn = result;
+    var calledFuncArguments = arguments;
+    
+    /*while (i < arguments.length) {
+      _.each(result, function(element, index) {
+        console.log(element);
+        if (_.contains(arguments[i], element)) {
+          console.log('trigger');
+          result.splice(index, 1);
+        }
+        i++;
+      })
+    }*/
+    // var count = 1;
+
+    // console.log(arguments[0]);
+
+    _.each(collectionToCallEachOn, function(element, index) {
+      var splice = index;
+      var i = 1;
+      console.log('collection: ', JSON.stringify(collectionToCallEachOn));
+      // console.log('count: ', count);
+
+      while (i < calledFuncArguments.length) {
+        // console.log('index: ', i);
+        console.log('result', JSON.stringify(result));
+        // console.log('length', calledFuncArguments.length);
+        console.log('current element', element);
+        console.log('compared array: ', JSON.stringify(calledFuncArguments[i]));
+        if (_.contains(calledFuncArguments[i], element)) {
+          // console.log('current element', element);
+          console.log('before splice', JSON.stringify(result));
+          // original array is messed up after SPLICE
+          // index might be causing bug
+          result.splice(index, 1); // this is causing BUG in code
+          console.log('after splice', JSON.stringify(result));
+        }
+        console.log('end');
+        i++;
+      }
+
+      // count++;
+    })
+
+    console.log('END');
+    
+    return result;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
