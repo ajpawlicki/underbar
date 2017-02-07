@@ -224,7 +224,7 @@
       /// console.log('accumulator', accumulator);
       /// console.log('current', iterator(value));
       if(argumentsLength == 1) {
-        return _.contains(collection, false) ? false : true;
+        return !_.contains(collection, false);
       }
       if(!accumulator || !iterator(value)) {
         return false;
@@ -243,7 +243,7 @@
   
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-    var argumentsLength = arguments.length;
+    /*var argumentsLength = arguments.length;
 
     return _.reduce(collection, function(accumulator, current) {
       if (argumentsLength == 1) {
@@ -256,7 +256,14 @@
         return true;
       }
       return false;
-    }, false);
+    }, false);*/
+    if (arguments.length < 2) {
+      return _.contains(collection, true);
+    }
+    return !_.every(collection, function(element) {
+      return !iterator(element);
+    })
+    
   };
 
 
