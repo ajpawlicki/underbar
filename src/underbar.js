@@ -590,27 +590,44 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
-    var result = [];
-    function flat(array) {
-      /*return _.reduce(nestedArray, function(accumulator, current) {
-        if (!Array.isArray(current)) {
-          return current;
-        }
-      });*/
-      _.each(array, function(element) {
-        // base case
-        if (!Array.isArray(element)) {
-          result.push(element);
-        }
-        flat(element);
-      });
-    }
+    // var result = [];
+    // function flat(array) {
+    //   /*return _.reduce(nestedArray, function(accumulator, current) {
+    //     if (!Array.isArray(current)) {
+    //       return current;
+    //     }
+    //   });*/
+    //   _.each(array, function(element) {
+    //     // base case
+    //     if (!Array.isArray(element)) {
+    //       result.push(element);
+    //     }
+    //     flat(element);
+    //   });
+    // }
 
-    // recursion;
+    // // recursion;
 
-    flat(nestedArray);
+    // flat(nestedArray);
 
-    return result;
+    // return result;
+
+    var results = [];
+
+    _.each(nestedArray, function(element) {
+      // base case
+      if (!Array.isArray(element)) {
+        results.push(element);
+      }
+      // recursive case
+      else {
+        // debugger;
+        results = results.concat(_.flatten(element));
+      }
+    });
+
+    return results;
+
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
@@ -648,9 +665,9 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
-    var result = arguments[0];
-    var collectionToCallEachOn = arguments[0];
-    var calledFuncArguments = arguments;
+    // var result = arguments[0];
+    // // var collectionToCallEachOn = arguments[0];
+    // var calledFuncArguments = arguments;
 
     var firstParameter = arguments[0];
 
@@ -661,8 +678,8 @@
       return !_.contains(intersectionArray, element);
     });
 
-    console.log('intersectionArray: ', JSON.stringify(intersectionArray));
-    console.log('firstParameter: ', JSON.stringify(firstParameter));
+    // console.log('intersectionArray: ', JSON.stringify(intersectionArray));
+    // console.log('firstParameter: ', JSON.stringify(firstParameter));
 
     /*while (i < arguments.length) {
       _.each(result, function(element, index) {
